@@ -1,0 +1,18 @@
+version: "3"
+networks:
+  voiceout:
+services:
+  web:
+    container_name: voiceout_web
+    networks:
+      - voiceout
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src:/var/www/html
+      - ./configs/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - 8010:80
+      - 3370:3306
+
