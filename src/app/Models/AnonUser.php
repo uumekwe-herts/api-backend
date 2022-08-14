@@ -12,14 +12,14 @@ class AnonUser extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
     protected $collection = 'anonymous_users';
-    //protected $table = 'anonymous_users';
+//    protected $table = 'anonymous_users';
 //    protected $fillable = [
 //        'email',
 //        'password'
 //    ];
     public $timestamps = true;
     protected $fillable = ['question_1', 'answer_1', 'question_2', 'answer_2',
-        'question_3', 'answer_3', 'password', 'username'
+        'question_3', 'answer_3', 'password', 'email'
     ];
 
     /**

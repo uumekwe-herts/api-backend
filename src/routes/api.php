@@ -31,8 +31,6 @@ Route::post('/anonymous/register', [AnonymousUserAuthenticationController::class
 Route::group(['prefix' => '/anonymous','middleware' => ['assign.guard:anon_api','auth.jwt']],function ()
 {
     Route::get('/dashboard', [AnonymousUserController::class, 'dashboard']);
+    Route::post('/logout', [AnonymousUserAuthenticationController::class, 'logout']);
 });
 
-//Route::prefix('anonymous')->controller(AnonymousUserAuthenticationController::class)->group(function () {
-//    Route::post('/login', 'login');
-//});

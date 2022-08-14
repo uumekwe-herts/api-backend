@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AnonRegQuestion;
 use App\Models\AnonUser;
+use Illuminate\Support\Facades\Auth;
 
 class AnonymousUserController extends Controller
 {
@@ -14,11 +15,9 @@ class AnonymousUserController extends Controller
         return response()->json($regQuestions);
     }
 
-
-
     public function dashboard()
     {
-        return response()->json('anonymous dashboard');
+        return Auth::user();
     }
 
 }
