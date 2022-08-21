@@ -46,10 +46,11 @@ class AnonymousUserAuthenticationController extends Controller
         if (!$token = auth()->guard('anon_api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        $cookie = cookie('jwt',$token, 60 * 24); //1 day
+        //$cookie = cookie('jwt',$token, 60 * 24); //1 day
         return response([
-            'message' => 'Success'
-        ])->withCookie($cookie);
+            'message' => 'Success',
+            'token' => $token
+        ]);
     }
     /**
      * Get the authenticated User.
@@ -66,12 +67,12 @@ class AnonymousUserAuthenticationController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
-    {
-      $cookie = Cookie::forget('jwt');
-      auth('anon_api')->logout();
-       return response()->json([
-           'message' => 'Successfully logged out'
-       ])->withCookie($cookie);
-    }
+//    public function logout()
+//    {
+//     // $cookie = Cookie::forget('jwt');
+//      auth('anon_api')->logout();
+//       return response()->json([
+//           'message' => 'Successfully logged out'
+//       ]);
+//    }
 }
