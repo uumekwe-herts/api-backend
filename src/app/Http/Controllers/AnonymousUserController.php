@@ -15,7 +15,7 @@ class AnonymousUserController extends Controller
         return response()->json($regQuestions);
     }
 
-    public function dashboard()
+    public function profile()
     {
         return Auth::user();
     }

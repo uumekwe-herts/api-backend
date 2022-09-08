@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\AnonymousUserController;
 use App\Http\Controllers\AnonymousUserAuthenticationController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,20 +17,28 @@ use App\Http\Controllers\AnonymousUserAuthenticationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/anon-user/reg-questions', [AnonymousUserController::class, 'regQuestions']);
 Route::post('/anon-user/create', [AnonymousUserController::class, 'createAnonSecretKey']);
 
 Route::post('/anonymous/login', [AnonymousUserAuthenticationController::class, 'login']);
-
 Route::post('/anonymous/register', [AnonymousUserAuthenticationController::class, 'register']);
+Route::post('/user/register', [UserController::class, 'register']);
+Route::post('/user/login', [UserController::class, 'login']);
 
-Route::group(['prefix' => '/anonymous','middleware' => ['assign.guard:anon_api','auth.jwt']],function ()
+Route::get('/ngstates', [HelperController::class, 'getNgStates']);
+
+Route::get('/user/profile', [UserController::class, 'loggedInUser']);
+
+Route::group(['prefix' => '/anonymous','middleware' => ['assign.guard:anon_api'] ],function ()
 {
-    Route::get('/dashboard', [AnonymousUserController::class, 'dashboard']);
+    Route::get('/profile', [AnonymousUserController::class, 'profile']);
     //Route::post('/logout', [AnonymousUserAuthenticationController::class, 'logout']);
 });
+
+Route::group(['prefix' => '/user','middleware' => ['assign.guard:user_api'] ],function ()
+{
+    Route::get('/profile', [UserController::class, 'profile']);
+});
+
+
 
