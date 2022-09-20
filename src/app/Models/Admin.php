@@ -3,15 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Jenssegers\Mongodb\Eloquent\Model;
 
 class Admin extends Authenticatable implements JWTSubject
 {
+    use HasFactory, Notifiable;
 
     protected $collection = 'admin';
-    use HasFactory;
+    protected $connection = 'mongodb';
+
+
+    public $timestamps = true;
+    protected $fillable = ['first_name', 'last_name', 'email', 'password'];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

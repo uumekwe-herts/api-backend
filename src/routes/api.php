@@ -6,6 +6,8 @@ use App\Http\Controllers\HelperController;
 use App\Http\Controllers\AnonymousUserController;
 use App\Http\Controllers\AnonymousUserAuthenticationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminUserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +26,8 @@ Route::post('/anonymous/login', [AnonymousUserAuthenticationController::class, '
 Route::post('/anonymous/register', [AnonymousUserAuthenticationController::class, 'register']);
 Route::post('/user/register', [UserController::class, 'register']);
 Route::post('/user/login', [UserController::class, 'login']);
+Route::post('/admin/register', [AdminUserController::class, 'register']);
+Route::post('/admin/login', [AdminUserController::class, 'login']);
 
 Route::get('/ngstates', [HelperController::class, 'getNgStates']);
 
@@ -32,7 +36,6 @@ Route::get('/user/profile', [UserController::class, 'loggedInUser']);
 Route::group(['prefix' => '/anonymous','middleware' => ['assign.guard:anon_api'] ],function ()
 {
     Route::get('/profile', [AnonymousUserController::class, 'profile']);
-    //Route::post('/logout', [AnonymousUserAuthenticationController::class, 'logout']);
 });
 
 Route::group(['prefix' => '/user','middleware' => ['assign.guard:user_api'] ],function ()
