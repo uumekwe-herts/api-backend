@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class RegularUser extends Authenticatable implements JWTSubject
 {
-
     use HasFactory, Notifiable;
     protected $collection = 'regular_users';
     public $timestamps = true;

@@ -36,9 +36,11 @@ class AdminUserController extends Controller
         if (!$token = auth()->guard('admin_api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        $adminUser = Admin::where('email', $request->input('email'))->get()->first();
         return response([
             'message' => 'Success',
-            'token' => $token
+            'token' => $token,
+            'adminUser' => $adminUser
         ]);
     }
 

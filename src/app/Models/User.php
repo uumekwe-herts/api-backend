@@ -4,16 +4,15 @@ namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Jenssegers\Mongodb\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
-    protected $connection = 'mongodb';
-    protected $collection = 'users';
+
+    protected $table = 'users';
 
     public $timestamps = true;
     protected $fillable = ['first_name', 'last_name', 'email', 'password',

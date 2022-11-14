@@ -2,8 +2,7 @@
 
 namespace App\Models;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-//use Illuminate\Foundation\Auth\User as Authenticatable;
-use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class AnonUser extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
-    protected $collection = 'anonymous_users';
+    protected $table = 'anonymous_users';
     public $timestamps = true;
     protected $fillable = ['question_1', 'answer_1', 'question_2', 'answer_2',
         'question_3', 'answer_3', 'password', 'email'

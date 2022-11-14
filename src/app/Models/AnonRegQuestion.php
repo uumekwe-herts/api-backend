@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Models;
-use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class AnonRegQuestion extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'anonymousreg_questions';
+    public $timestamps = true;
+    protected $table = 'anonymousreg_questions';
 }

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\AnonUser;
 use Illuminate\Http\Request;
-use JWTAuth;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
+
 
 class AnonymousUserAuthenticationController extends Controller
 {
@@ -46,10 +45,11 @@ class AnonymousUserAuthenticationController extends Controller
         if (!$token = auth()->guard('anon_api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        //$cookie = cookie('jwt',$token, 60 * 24); //1 day
+        $user =  AnonUser::where('email', $request->input('email'))->get()->first();
         return response([
             'message' => 'Success',
-            'token' => $token
+            'token' => $token,
+            'user' => $user
         ]);
     }
     /**

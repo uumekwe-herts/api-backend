@@ -3,18 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Jenssegers\Mongodb\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Jenssegers\Mongodb\Eloquent\Model;
 
 class Admin extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
-    protected $collection = 'admin';
-    protected $connection = 'mongodb';
-
+    protected $table = 'admin';
 
     public $timestamps = true;
     protected $fillable = ['first_name', 'last_name', 'email', 'password'];
