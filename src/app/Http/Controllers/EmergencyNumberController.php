@@ -20,7 +20,7 @@ class EmergencyNumberController extends Controller
         return response()->json(['number' => $number]);
     }
 
-    public function list(Request $request)
+    public function list()
     {
         $emergencyNumbers = EmergencyNumber::all();
         return response()->json(['numbers' => $emergencyNumbers]);
